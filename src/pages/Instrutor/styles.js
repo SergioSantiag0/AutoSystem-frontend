@@ -3,6 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   background: #17171a;
+  height: 100%;
 `;
 
 export const Content = styled.div`

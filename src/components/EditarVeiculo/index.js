@@ -35,7 +35,7 @@ export default function EditarVeiculo({ show, handleClose, veiculo }) {
       <ModalHeader>
         <h4>Editar cadastro</h4>
       </ModalHeader>
-      <Modal.Body>
+      <Modal.Body style={{ background: '#2f3e47' }}>
         <ModalBody>
           <Form onSubmit={handleSubmit}>
             <div className="alinhador">

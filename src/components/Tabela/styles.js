@@ -82,9 +82,8 @@ export const Container = styled.div`
 // Paginação
 export const Lista = styled.ul`
   display: flex;
-  background: #17171a;
+  background: #2f3e47;
   padding: 20px 10px;
-  border-bottom: 1px solid #fff;
 
   p {
     margin-right: auto;

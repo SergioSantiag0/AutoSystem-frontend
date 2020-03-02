@@ -39,7 +39,7 @@ export const ModalHeader = styled(Modal.Header)`
   display: flex;
   flex-direction: column;
   background: #f2f2f2;
-  color: #17171a;
+  color: #000;
   font-weight: bold;
 
   h5 {

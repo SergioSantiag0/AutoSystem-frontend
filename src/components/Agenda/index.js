@@ -102,7 +102,7 @@ export default function Agenda({
         </div>
       </ModalHeader>
 
-      <Modal.Body style={{ background: '#17171A' }}>
+      <Modal.Body style={{ background: '#253138' }}>
         <ModalBody>
           <header>
             <button type="button" onClick={handlePrevDay}>
@@ -132,7 +132,7 @@ export default function Agenda({
         </ModalBody>
       </Modal.Body>
 
-      <Modal.Footer style={{ background: '#f2f2f2' }}>
+      <Modal.Footer style={{ background: '#2f3e47' }}>
         <Button variant="danger" onClick={handleClose}>
           Fechar
         </Button>

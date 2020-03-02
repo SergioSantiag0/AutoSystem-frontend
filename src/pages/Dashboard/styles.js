@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`
-  background: #17171a;
+  background: #253138;
   height: 100%;
 `;
 
@@ -16,7 +16,8 @@ export const Content = styled.div`
 export const Search = styled.div`
   display: flex;
   padding: 10px 20px;
-  background: #fff;
+  color: #fff;
+  background: #2f3e47;
   border-radius: 2px;
   align-items: center;
   justify-content: space-between;
@@ -37,15 +38,18 @@ export const Search = styled.div`
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
       margin-right: 0;
-      background: rgba(0, 0, 0, 0.1);
-      color: #000;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
       padding: 10px;
+
+      ::placeholder {
+        color: #fff;
+      }
     }
 
     button {
       border: 0;
       background: none;
-      margin-top: 3px;
     }
   }
 

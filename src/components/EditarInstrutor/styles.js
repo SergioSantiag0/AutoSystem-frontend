@@ -6,6 +6,7 @@ export const ModalStyled = styled(Modal)``;
 export const ModalHeader = styled(Modal.Header)``;
 
 export const ModalBody = styled.div`
+  color: #fff;
   div.alinhador {
     display: flex;
     flex-direction: column;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #17171a;
+  background: #253138;
 `;
 
 export const Content = styled.div`
@@ -16,7 +16,7 @@ export const Content = styled.div`
   }
 
   form {
-    background: #fafafa;
+    background: #f2f2f2;
     border-radius: 2px;
     margin-top: 20px;
     padding: 20px;
@@ -83,16 +83,18 @@ export const Title = styled.div`
   margin-top: 10px;
   display: flex;
   padding: 10px 20px;
-  background: #fafafa;
+  background: #2f3e47;
   border-radius: 2px;
   align-items: center;
 
   svg {
     font-size: 30px;
     margin-right: 15px;
+    margin-bottom: 8px;
+    color: #f2f2f2;
   }
-
-  span {
+  h1 {
+    color: #f2f2f2;
     font-size: 30px;
   }
 `;

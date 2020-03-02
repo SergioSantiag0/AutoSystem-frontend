@@ -3,7 +3,7 @@ import { darken } from 'polished';
 
 export const Head = styled.header`
   width: 100%;
-  background: #17171a;
+  background: ${darken(0.03, '#253138')};
   display: flex;
   justify-content: space-between;
   height: 60px;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #17171a;
+  background: #253138;
   height: 150%;
 `;
 
@@ -22,7 +22,8 @@ export const Title = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
-  background: #fafafa;
+  background: #2f3e47;
+  color: #fff;
   border-radius: 2px;
   align-items: center;
 

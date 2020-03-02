@@ -1,22 +1,22 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #17171a;
+  background: #253138;
 `;
 
 export const Title = styled.div`
   display: flex;
   padding: 10px 20px;
-  background: #fafafa;
-  border-radius: 2px;
-  align-items: center;
+  background: #2f3e47;
+  border-radius: 4px;
 
   svg {
     font-size: 30px;
     margin-right: 15px;
+    color: #f2f2f2;
   }
-
-  span {
+  h1 {
+    color: #f2f2f2;
     font-size: 30px;
   }
 `;
@@ -28,8 +28,8 @@ export const Content = styled.div`
   padding: 10px;
 
   form {
-    background: #fafafa;
-    border-radius: 2px;
+    background: #f2f2f2;
+    border-radius: 4px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -99,6 +99,7 @@ export const Content = styled.div`
     button {
       font-size: 16px;
       border-radius: 4px;
+      margin-top: 10px;
       border: 0;
       height: 38px;
       color: #fff;

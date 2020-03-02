@@ -21,7 +21,7 @@ html, body, #root {
 
 body {
   -webkit-font-smoothing: antialiased;
-
+  background: #253138;
 }
 
 body, input, button {

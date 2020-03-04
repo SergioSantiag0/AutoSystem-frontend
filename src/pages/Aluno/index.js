@@ -121,56 +121,114 @@ export default function Aluno() {
           <h5>Dados pessoais</h5>
           <div className="alinhador-content">
             <div className="alinhador">
-              <Input type="text" name="nome" placeholder="Nome completo" />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="nome"
+                placeholder="Nome completo"
+              />
 
               <Input
+                autoComplete="off"
                 type="text"
                 name="cpf"
                 placeholder="CPF (apenas números)"
                 maxLength={11}
               />
 
-              <Input type="text" name="rg" placeholder="RG" maxLength={14} />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="rg"
+                placeholder="RG"
+                maxLength={14}
+              />
             </div>
 
             <div className="alinhador">
-              <Input type="email" name="email" placeholder="E-mail" />
+              <Input
+                autoComplete="off"
+                type="email"
+                name="email"
+                placeholder="E-mail"
+              />
 
               <Input
+                autoComplete="off"
                 type="text"
                 name="telefone"
                 placeholder="Telefone"
                 maxLength={11}
               />
 
-              <Input type="date" title="Data" name="data_nasc" />
+              <Input
+                autoComplete="off"
+                type="date"
+                title="Data"
+                name="data_nasc"
+              />
             </div>
 
             <div className="alinhador">
-              <Select placeholder="Sexo" name="sexo" options={sexo} />
+              <Select
+                autoComplete="off"
+                placeholder="Sexo"
+                name="sexo"
+                options={sexo}
+              />
 
-              <Input type="text" name="nome_pai" placeholder="Nome do pai" />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="nome_pai"
+                placeholder="Nome do pai"
+              />
 
-              <Input type="text" name="nome_mae" placeholder="Nome da mãe" />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="nome_mae"
+                placeholder="Nome da mãe"
+              />
             </div>
           </div>
 
           <h5>Endereço</h5>
           <div className="alinhador-content">
             <div className="alinhador">
-              <Input type="text" name="endereco" placeholder="Rua" />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="endereco"
+                placeholder="Rua"
+              />
             </div>
 
             <div className="alinhador">
-              <Input type="text" name="bairro" placeholder="Bairro" />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="bairro"
+                placeholder="Bairro"
+              />
             </div>
 
             <div className="alinhador">
-              <Input type="text" name="cidade" placeholder="Cidade" />
+              <Input
+                autoComplete="off"
+                type="text"
+                name="cidade"
+                placeholder="Cidade"
+              />
             </div>
 
             <div className="alinhador">
-              <Select placeholder="Estado" name="uf" options={uf} />
+              <Select
+                autoComplete="off"
+                placeholder="Estado"
+                name="uf"
+                options={uf}
+              />
             </div>
           </div>
           <h5>Informações adicionais</h5>
@@ -178,6 +236,7 @@ export default function Aluno() {
             <div className="alinhador">
               <p>Categoria</p>
               <Select
+                autoComplete="off"
                 placeholder="categoria"
                 name="categoria"
                 options={categoria}
@@ -186,6 +245,7 @@ export default function Aluno() {
             <div className="alinhador">
               <p>Instrutor</p>
               <Select
+                autoComplete="off"
                 placeholder="Instrutor"
                 name="instrutor_id"
                 options={instrutores}
@@ -194,6 +254,7 @@ export default function Aluno() {
             <div className="alinhador">
               <p>Veículo</p>
               <Select
+                autoComplete="off"
                 placeholder="Veículo"
                 name="veiculo_id"
                 options={veiculos}
@@ -202,6 +263,7 @@ export default function Aluno() {
             <div className="alinhador">
               <p>Data de matrícula:</p>
               <Input
+                autoComplete="off"
                 type="date"
                 name="data_matric"
                 placeholder="Data de matrícula"
@@ -210,15 +272,26 @@ export default function Aluno() {
           </div>
           <div>
             <h5>Informações profissionais</h5>
-            <Input type="text" name="profissao" placeholder="Profissão" />
             <Input
+              autoComplete="off"
+              type="text"
+              name="profissao"
+              placeholder="Profissão"
+            />
+            <Input
+              autoComplete="off"
               type="text"
               name="local_trab"
               placeholder="Local de trabalho"
             />
           </div>
           <p id="status">Status:</p>
-          <Select placeholder="Status" name="ativo" options={ativo} />
+          <Select
+            autoComplete="off"
+            placeholder="Status"
+            name="ativo"
+            options={ativo}
+          />
           <button type="submit">Salvar</button>
         </Form>
       </Content>

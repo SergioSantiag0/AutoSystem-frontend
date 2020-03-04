@@ -34,15 +34,17 @@ export default function AgendaAluno({ match }) {
       buttons: [
         {
           label: 'Sim',
-          onClick: () =>
-            api
-              .delete(`/aulas/${aulaId}`)
-              .then(window.location.reload())
-              .catch(error => {
-                toast.error(
-                  'Não foi possivel cancelar a aula, voce está a menos de 2 horas'
-                );
-              }),
+          onClick: async () => {
+            try {
+              await api.delete(`/aulas/${aulaId}`);
+              toast.success('Agendamento deletado com sucesso');
+              window.location.reload();
+            } catch (e) {
+              toast.error(
+                'Não foi possivel deletar o agendamento, você está a menos de 2 horas'
+              );
+            }
+          },
         },
         {
           label: 'Não',

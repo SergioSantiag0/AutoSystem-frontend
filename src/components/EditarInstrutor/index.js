@@ -23,7 +23,7 @@ export default function EditarInstrutor({
     setVeiculo(instrutor.veiculo);
     if (
       instrutor.data_carteira !== undefined &&
-      instrutor.data_carteira !== undefined
+      instrutor.data_curso !== undefined
     ) {
       setData_carteira(format(parseISO(instrutor.data_carteira), 'yyyy-MM-dd'));
       setData_curso(format(parseISO(instrutor.data_curso), 'yyyy-MM-dd'));

@@ -19,7 +19,7 @@ export default function EditarVeiculo({ show, handleClose, veiculo }) {
     setAno(veiculo.ano);
   }, [veiculo.ano, veiculo.cor, veiculo.modelo, veiculo.placa]);
 
-  async function handleSubmit(data) {
+  function handleSubmit(data) {
     api
       .put(`/veiculos/${veiculo.id}`, data)
       .then(res => {

@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { AiFillExclamationCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
+import { cpf } from 'cpf-cnpj-validator';
+
 import api from '../../services/api';
 
 import Header from '../../components/Header';
@@ -96,17 +98,21 @@ export default function Aluno() {
   ];
 
   function handleSubmit(data) {
-    api
-      .get(`/alunos/${data.cpf}`)
-      .then(res => toast.error('O aluno já está cadastrado'))
-      .catch(error => {
-        api
-          .post(`/alunos`, data)
-          .then(toast.success('Aluno cadastrado com sucesso'))
-          .catch(error => {
-            'Erro ao realizar o cadastro, confira os dados';
-          });
-      });
+    if (cpf.isValid(data.cpf)) {
+      api
+        .get(`/alunos/${data.cpf}`)
+        .then(res => toast.error('O aluno já está cadastrado'))
+        .catch(error => {
+          api
+            .post(`/alunos`, data)
+            .then(toast.success('Aluno cadastrado com sucesso'))
+            .catch(error => {
+              'Erro ao realizar o cadastro, confira os dados';
+            });
+        });
+    } else {
+      toast.error('Erro ao realizar o cadastro, insira um CPF válido');
+    }
   }
 
   return (

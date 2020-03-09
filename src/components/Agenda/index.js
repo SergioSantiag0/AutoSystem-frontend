@@ -89,6 +89,7 @@ export default function Agenda({
         instrutor_id,
       });
       toast.success('Aula agendada com sucesso');
+      handleClose();
     }
   }
 
@@ -136,7 +137,9 @@ export default function Agenda({
         <Button variant="danger" onClick={handleClose}>
           Fechar
         </Button>
-        <Button variant="success">Salvar</Button>
+        <Button variant="success" onClick={handleClose}>
+          Salvar
+        </Button>
       </Modal.Footer>
     </ModalStyled>
   );

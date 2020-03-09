@@ -5,6 +5,30 @@ export const ModalStyled = styled(Modal)`
   margin-top: 20px;
 `;
 
+export const ModalHeader = styled(Modal.Header)`
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+  color: #000;
+  font-weight: bold;
+
+  h5 {
+    align-self: center;
+    font-size: 24px;
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  span {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+`;
+
 export const ModalBody = styled.div`
   margin: 10px auto;
   display: flex;
@@ -32,30 +56,6 @@ export const ModalBody = styled.div`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
     margin-top: 30px;
-  }
-`;
-
-export const ModalHeader = styled(Modal.Header)`
-  display: flex;
-  flex-direction: column;
-  background: #f2f2f2;
-  color: #000;
-  font-weight: bold;
-
-  h5 {
-    align-self: center;
-    font-size: 24px;
-  }
-
-  div {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
-
-  span {
-    margin-top: 5px;
-    font-size: 20px;
   }
 `;
 

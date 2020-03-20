@@ -33,6 +33,8 @@ export default function Agenda({
   const [agenda, setAgenda] = useState([]);
   const [date, setDate] = useState(new Date());
 
+  const [clicked, setClicked] = useState('');
+
   const dateFormatted = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
     [date]
@@ -61,7 +63,7 @@ export default function Agenda({
       });
       setAgenda(data);
     }
-
+    setClicked('');
     loadSchedule();
   }, [date, instrutor_id]);
 
@@ -82,6 +84,8 @@ export default function Agenda({
         setSeconds(setMinutes(setHours(day, hour), 0), 0),
         0
       );
+      setClicked(time);
+      console.log(time);
 
       await api.post('/aulas', {
         date: dataAula,
@@ -89,7 +93,6 @@ export default function Agenda({
         instrutor_id,
       });
       toast.success('Aula agendada com sucesso');
-      handleClose();
     }
   }
 
@@ -124,6 +127,7 @@ export default function Agenda({
                 past={time.past}
                 key={time.time}
                 available={!time.aula}
+                clicked={time.time === clicked}
               >
                 <strong>{time.time}</strong>
                 <span>{time.aula ? time.aula.aluno.nome : 'Em aberto'}</span>

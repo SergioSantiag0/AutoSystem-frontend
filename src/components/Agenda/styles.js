@@ -65,6 +65,9 @@ export const Aula = styled.li`
   background: ${props => (props.available ? '#f2f2f2' : '#fff')};
   cursor: pointer;
 
+  box-shadow: ${props => (props.clicked ? '1px 0px 30px #00b652' : '')};
+  border: ${props => (props.clicked ? '3px solid #00b652' : '')};
+
   opacity: ${props => (props.past ? 0.6 : 1)};
 
   strong {

@@ -26,7 +26,7 @@ export default function Header() {
           <Link to="/veiculos">Veículos</Link>
         </li>
         <li id="br">
-          <Link to="/">Exames</Link>
+          <Link to="/exames">Exames</Link>
         </li>
         <button
           type="button"

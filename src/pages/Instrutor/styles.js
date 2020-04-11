@@ -32,7 +32,7 @@ export const Content = styled.div`
 
     p {
       font-size: 16px;
-      margin-top: 5px;
+      margin-top: 10px;
     }
 
     input {
@@ -73,6 +73,12 @@ export const Content = styled.div`
       &:hover {
         background-color: #00b652;
       }
+    }
+
+    span {
+      color: #fb6f91;
+      margin-bottom: 10px;
+      align-self: flex-start;
     }
   }
 `;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
+import Swal from 'sweetalert2';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { parseISO, format } from 'date-fns';
 
@@ -21,28 +21,23 @@ export default function Tabela({ aluno_ }) {
   }, []);
 
   function handleDelete(id, nome) {
-    confirmAlert({
+    Swal.fire({
       title: 'Deletar cadastro',
-      message: `Tem cereteza que deseja deletar o cadastro do aluno ${nome}?`,
-      buttons: [
-        {
-          label: 'Sim',
-          onClick: () =>
-            api
-              .delete(`/alunos/${id}`)
-              .then(
-                res => toast.success('Cadastro deletado com sucesso'),
-                window.location.reload()
-              )
-              .catch(error =>
-                toast.error('Não foi possível deletar o cadastro')
-              ),
-        },
-        {
-          label: 'Não',
-          onClick: () => history.push('dashboard'),
-        },
-      ],
+      icon: 'warning',
+      type: 'warning',
+      text: `Tem cereteza que deseja deletar o cadastro do aluno ${nome}?`,
+      showConfirmButton: true,
+      confirmButtonColor: '#04d361',
+      confirmButtonText: 'Sim',
+      showCancelButton: true,
+      cancelButtonColor: '#f64c75',
+      cancelButtonText: 'Não',
+    }).then(async result => {
+      if (result.value) {
+        await api.delete(`/alunos/${id}`);
+        toast.success('Cadastro deletado com sucesso');
+        window.location.reload();
+      }
     });
   }
 
@@ -99,7 +94,7 @@ export default function Tabela({ aluno_ }) {
                       type="button"
                       onClick={() => {
                         history.push(
-                          `agendaAluno/${aluno.id}/${aluno.nome}/${aluno.instrutor_id}/${aluno.instrutor.nome}`
+                          `agendaAluno/${aluno.id}/${aluno.nome}/${aluno.instrutor_id}/${aluno.instrutor.nome}/${aluno.categoria}`
                         );
                       }}
                     >
@@ -121,7 +116,7 @@ export default function Tabela({ aluno_ }) {
                         handleDelete(aluno.id, aluno.nome);
                       }}
                     >
-                      Inativar
+                      Deletar
                     </button>
                   </td>
                 </tr>
@@ -158,7 +153,7 @@ export default function Tabela({ aluno_ }) {
                       type="button"
                       onClick={() => {
                         history.push(
-                          `agendaAluno/${aluno.id}/${aluno.nome}/${aluno.instrutor.id}/${aluno.instrutor.nome}`
+                          `agendaAluno/${aluno.id}/${aluno.nome}/${aluno.instrutor.id}/${aluno.instrutor.nome}/${aluno.categoria}`
                         );
                       }}
                     >

@@ -31,7 +31,7 @@ export const List = styled.ul`
     font-size: 18px;
     margin-right: 20px;
     margin-top: 11px;
-    padding-right: 10px;
+    padding-right: 5px;
 
     a {
       color: #fff;
@@ -56,7 +56,7 @@ export const List = styled.ul`
     }
   }
 
-  li:hover {
-    border-bottom: 3px solid #eee;
+  a:hover {
+    color: #00b652;
   }
 `;

@@ -42,6 +42,7 @@ export default function Agenda({
 
   useEffect(() => {
     async function loadSchedule() {
+      setClicked('');
       const response = await api.get(`agenda/${instrutor_id}`, {
         params: { date },
       });
@@ -63,7 +64,6 @@ export default function Agenda({
       });
       setAgenda(data);
     }
-    setClicked('');
     loadSchedule();
   }, [date, instrutor_id]);
 
@@ -85,7 +85,6 @@ export default function Agenda({
         0
       );
       setClicked(time);
-      console.log(time);
 
       await api.post('/aulas', {
         date: dataAula,

@@ -9,6 +9,7 @@ import EditarAluno from '../pages/EditarAluno';
 import Instrutor from '../pages/Instrutor';
 import Veiculo from '../pages/Veiculo';
 import Agenda from '../pages/AgendaAluno';
+import Exames from '../pages/Exames';
 
 export default function Routes() {
   return (
@@ -20,10 +21,11 @@ export default function Routes() {
       <Route path="/instrutores" component={Instrutor} isPrivate />
       <Route path="/veiculos" component={Veiculo} isPrivate />
       <Route
-        path="/agendaAluno/:id/:nome/:instrutor_id/:instrutor"
+        path="/agendaAluno/:id/:nome/:instrutor_id/:instrutor/:categoria"
         component={Agenda}
         isPrivate
       />
+      <Route path="/exames" component={Exames} isPrivate />
     </Switch>
   );
 }

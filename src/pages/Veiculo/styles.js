@@ -76,6 +76,11 @@ export const Content = styled.div`
         background-color: #00b652;
       }
     }
+    span {
+      color: #fb6f91;
+      margin-bottom: 10px;
+      align-self: flex-start;
+    }
   }
 `;
 

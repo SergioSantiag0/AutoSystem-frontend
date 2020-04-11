@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
+import Swal from 'sweetalert2';
 import { format, parseISO } from 'date-fns';
 import { toast } from 'react-toastify';
-import { confirmAlert } from 'react-confirm-alert';
+import * as Yup from 'yup';
 
 import { AiFillExclamationCircle } from 'react-icons/ai';
+import { cpf } from 'cpf-cnpj-validator';
 import api from '../../services/api';
 
 import { Container, Title, Content, Table } from './styles';
 
 import Header from '../../components/Header';
 import EditarInstrutor from '../../components/EditarInstrutor';
+
+const schema = Yup.object().shape({
+  nome: Yup.string().required('O nome do instrutor é obrigatório'),
+  cpf: Yup.string()
+    .max(11)
+    .required('O CPF é obrigátorio'),
+  data_carteira: Yup.string().required('Informe a data da carteira'),
+  data_curso: Yup.string().required('Informe a data do curso'),
+  veiculo_id: Yup.string().required('Informe o veículo'),
+});
 
 export default function Instrutor() {
   const [veiculos, setVeiculos] = useState([]);
@@ -46,15 +58,19 @@ export default function Instrutor() {
   });
 
   function handleSubmit(data) {
-    api
-      .post(`/instrutores`, data)
-      .then(res => {
-        toast.success('Instrutor cadastrado com sucesso');
-      })
-      .catch(error => {
-        toast.error('Erro ao cadastrar, verifique os dados');
-      });
-    window.location.reload();
+    if (cpf.isValid(data.cpf)) {
+      api
+        .post(`/instrutores`, data)
+        .then(res => {
+          toast.success('Instrutor cadastrado com sucesso');
+        })
+        .catch(error => {
+          toast.error('Erro ao cadastrar, verifique os dados');
+        });
+      window.location.reload();
+    } else {
+      toast.error('Informe um CPF válido');
+    }
   }
 
   function handleUpdate(instrutor_update) {
@@ -63,30 +79,23 @@ export default function Instrutor() {
   }
 
   function handleDelete(id) {
-    confirmAlert({
-      title: 'Deletar cadastro',
-      message: `Tem cereteza que deseja deletar o cadastro do instrutor?`,
-      buttons: [
-        {
-          label: 'Sim',
-          onClick: async () => {
-            try {
-              await api.delete(`/instrutores/${id}`);
-              toast.success('Cadastro deletado com sucesso');
-              window.location.reload();
-            } catch (error) {
-              toast.error('Não foi possivel deletar o cadastro do instrutor');
-              window.location.reload();
-            }
-          },
-        },
-        {
-          label: 'Não',
-          onClick: () => {
-            window.location.reload();
-          },
-        },
-      ],
+    Swal.fire({
+      title: 'Deletar Cadastro',
+      icon: 'warning',
+      type: 'warning',
+      text: 'Tem cereteza que deseja deletar o cadastro do instrutor?',
+      showConfirmButton: true,
+      confirmButtonColor: '#04d361',
+      confirmButtonText: 'Sim',
+      showCancelButton: true,
+      cancelButtonColor: '#f64c75',
+      cancelButtonText: 'Não',
+    }).then(async result => {
+      if (result.value) {
+        await api.delete(`/instrutores/${id}`);
+        toast.success('Cadastro deletado com sucesso');
+        window.location.reload();
+      }
     });
   }
 
@@ -99,7 +108,7 @@ export default function Instrutor() {
           <h1>Instrutores</h1>
         </Title>
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} schema={schema}>
           <h5>Cadastrar novo instrutor</h5>
           <div className="alinhador-pai">
             <div className="alinhador">
@@ -112,6 +121,15 @@ export default function Instrutor() {
                 type="date"
                 name="data_carteira"
                 placeholder="Data da carteira"
+              />
+            </div>
+            <div className="alinhador">
+              <p>CPF:</p>
+              <Input
+                type="text"
+                name="cpf"
+                placeholder="CPF (apenas números)"
+                maxLength={11}
               />
             </div>
             <div className="alinhador">
@@ -134,7 +152,6 @@ export default function Instrutor() {
           <button type="submit">Salvar</button>
         </Form>
         <Title>
-          <AiFillExclamationCircle />
           <h1>Instrutores cadastrados</h1>
         </Title>
         <Table>

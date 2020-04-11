@@ -76,6 +76,19 @@ export const Container = styled.div`
         background: ${darken(0.08, '#f64c75')};
       }
     }
+
+    td button.exame {
+      padding: 8px 10px;
+      margin-left: 5px;
+      border-radius: 4px;
+      background: #ff6e00;
+      border: 0;
+      color: #fff;
+
+      &:hover {
+        background: ${darken(0.05, '#FF6E00')};
+      }
+    }
   }
 `;
 

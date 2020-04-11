@@ -20,6 +20,7 @@ export const Content = styled.div`
 
 export const Title = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 10px 20px;
   background: #2f3e47;
@@ -27,9 +28,17 @@ export const Title = styled.div`
   border-radius: 2px;
   align-items: center;
 
-  div {
+  div.title {
     display: flex;
+    margin-bottom: 5px;
   }
+
+  div.dates {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+
   svg {
     font-size: 30px;
     margin-right: 10px;
@@ -43,10 +52,9 @@ export const Title = styled.div`
 
   span {
     font-size: 20px;
-    margin-right: 20px;
   }
 
-  button {
+  button.add {
     background: #00b652;
     border: 0;
     width: 30px;
@@ -55,11 +63,45 @@ export const Title = styled.div`
     text-align: center;
     border-radius: 4px;
     color: #fff;
-    margin-right: 15px;
+    margin-right: 30px;
     transition: background 0.2s;
 
     &:hover {
       background: ${darken(0.1, '#00b652')};
+    }
+  }
+
+  button.clear {
+    background: #ff7812;
+    border: 0;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 4px;
+    color: #fff;
+    margin-right: 15px;
+    padding: 0 10px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.1, '#FF7812')};
+    }
+  }
+
+  button.exam {
+    background: #de0930;
+    border: 0;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 4px;
+    color: #fff;
+    margin-right: 15px;
+    padding: 0 10px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.1, '#DE0930')};
     }
   }
 `;

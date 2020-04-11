@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
+import Swal from 'sweetalert2';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { AiFillExclamationCircle } from 'react-icons/ai';
+import * as Yup from 'yup';
+
 import api from '../../services/api';
 
 import { Container, Title, Content, Table } from './styles';
 
 import Header from '../../components/Header';
 import EditarVeiculo from '../../components/EditarVeiculo';
+
+const schema = Yup.object().shape({
+  placa: Yup.string().required('Informe a placa do veiculo'),
+  cor: Yup.string().required('Informe a cor do veiculo'),
+  modelo: Yup.string().required('Informe o modelo do veiculo'),
+  ano: Yup.string().required('Informe o ano do veiculo'),
+});
 
 export default function Veiculo() {
   const [veiculos, setVeiculos] = useState([]);
@@ -27,11 +36,13 @@ export default function Veiculo() {
         setVeiculos([]);
       });
   }, []);
+
   function handleSubmit(data) {
     api
       .post(`/veiculos`, data)
       .then(res => {
         toast.success('Veículo cadastrado com sucesso');
+        window.location.reload();
       })
       .catch(error => {
         toast.error('Erro ao cadastrar, verifique os dados');
@@ -44,30 +55,23 @@ export default function Veiculo() {
   }
 
   function handleDelete(id) {
-    confirmAlert({
-      title: 'Deletar cadastro',
-      message: `Tem cereteza que deseja deletar o cadastro do veiculo?`,
-      buttons: [
-        {
-          label: 'Sim',
-          onClick: async () => {
-            try {
-              await api.delete(`/veiculos/${id}`);
-              toast.success('Cadastro deletado com sucesso');
-            } catch (error) {
-              toast.error(
-                'Não foi possivel deletar o cadastro, veículo em uso'
-              );
-            }
-          },
-        },
-        {
-          label: 'Não',
-          onClick: () => {
-            window.location.reload();
-          },
-        },
-      ],
+    Swal.fire({
+      title: 'Deletar Cadastro',
+      icon: 'warning',
+      type: 'warning',
+      text: 'Tem cereteza que deseja deletar o cadastro do veiculo?',
+      showConfirmButton: true,
+      confirmButtonColor: '#04d361',
+      confirmButtonText: 'Sim',
+      showCancelButton: true,
+      cancelButtonColor: '#f64c75',
+      cancelButtonText: 'Não',
+    }).then(async result => {
+      if (result.value) {
+        await api.delete(`/veiculos/${id}`);
+        toast.success('Veiculo deletado com sucesso');
+        window.location.reload();
+      }
     });
   }
 
@@ -80,7 +84,7 @@ export default function Veiculo() {
           <h1>Veículos</h1>
         </Title>
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} schema={schema}>
           <h5>Cadastrar novo veículo</h5>
           <div className="alinhador-pai">
             <div className="alinhador">
@@ -108,7 +112,6 @@ export default function Veiculo() {
           <button type="submit">Salvar</button>
         </Form>
         <Title>
-          <AiFillExclamationCircle />
           <h1>Veículos cadastrados</h1>
         </Title>
         <Table>

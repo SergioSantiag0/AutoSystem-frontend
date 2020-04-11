@@ -43,4 +43,10 @@ export const ModalBody = styled.div`
     margin-top: 10px;
     margin-right: 10px;
   }
+
+  span {
+    color: #fb6f91;
+    margin-bottom: 10px;
+    align-self: flex-start;
+  }
 `;

@@ -10,7 +10,8 @@ export const ModalHeader = styled(Modal.Header)`
   color: #000;
 `;
 
-export const ModalBody = styled.div`
+export const ModalBody = styled(Modal.Body)`
+  background: #2f3e47;
   color: #fff;
   div.alinhador {
     display: flex;
@@ -23,35 +24,26 @@ export const ModalBody = styled.div`
   }
 
   input {
+    cursor: pointer;
     font-size: 16px;
     width: 270px;
     height: 38px;
     margin: 2px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #000;
+    color: #17171a;
+    background: #f2f2f2;
     padding: 10px;
     margin-right: 15px;
-  }
 
-  select {
-    font-size: 16px;
-    width: 270px;
-    height: 38px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: #000;
-    padding: 8.5px;
+    &:read-only {
+      background: #c6c6c6;
+      cursor: default;
+    }
   }
 
   button {
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-
-  span {
-    color: #fb6f91;
-    margin-bottom: 10px;
-    align-self: flex-start;
+    margin-top: 20px;
+    margin-right: 20px;
   }
 `;

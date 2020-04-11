@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   background: #253138;
@@ -65,6 +66,10 @@ export const Search = styled.div`
     cursor: pointer;
     background-color: #17a2b8;
     transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.05, '#17a2b8')};
+    }
   }
 
   button.add_aluno {
@@ -79,6 +84,10 @@ export const Search = styled.div`
     cursor: pointer;
     background-color: #04d361;
     transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.05, '#04d361')};
+    }
   }
 `;
 

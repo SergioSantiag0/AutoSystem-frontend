@@ -56,10 +56,11 @@ export default function Instrutor() {
   }, []);
 
   veiculos.map(veiculo => {
-    veiculo.title = veiculo.placa;
+    return (veiculo.title = veiculo.placa);
   });
 
   function handleSubmit(data) {
+    console.log(data);
     if (cpf.isValid(data.cpf)) {
       api
         .post(`/instrutores`, data)

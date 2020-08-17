@@ -82,7 +82,7 @@ export default function Agenda({
     if (past) {
       toast.error('O horário requisitado já passou');
     } else {
-      const [hour, minutes] = time.split(':');
+      const [hour] = time.split(':');
       const dataAula = setMilliseconds(
         setSeconds(setMinutes(setHours(day, hour), 0), 0),
         0

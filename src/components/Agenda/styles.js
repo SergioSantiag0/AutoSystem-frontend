@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Modal } from 'react-bootstrap';
-import { darken } from 'polished';
 
 export const ModalStyled = styled(Modal)`
   margin-top: 20px;

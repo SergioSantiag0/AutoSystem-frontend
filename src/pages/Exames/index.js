@@ -13,6 +13,7 @@ import api from '../../services/api';
 
 export default function Exames() {
   const [exames, setExames] = useState([]);
+
   const theme = useContext(ThemeSwitcher);
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export default function Exames() {
         const response = await api.put(`/exames/${id}`, {
           resultado: 'aprovado',
         });
+        console.log(response);
         window.location.reload();
       }
     });

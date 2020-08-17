@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import Swal from 'sweetalert2';
 import { parseISO, format } from 'date-fns';
 
@@ -12,6 +13,7 @@ import api from '../../services/api';
 
 export default function Exames() {
   const [exames, setExames] = useState([]);
+  const theme = useContext(ThemeSwitcher);
 
   useEffect(() => {
     async function loadExams() {
@@ -95,10 +97,10 @@ export default function Exames() {
   }
 
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
-      <Content>
-        <Title>
+      <Content theme={theme.theme}>
+        <Title theme={theme.theme}>
           <h1>Exames de direção agendados</h1>
           <select
             onChange={e => {
@@ -133,41 +135,43 @@ export default function Exames() {
             </tr>
           </thead>
           <tbody>
-            {exames.map(exame => (
-              <tr key={exame.id}>
-                <td>{exame.aluno.nome}</td>
-                <td>{exame.categoria}</td>
-                <td>{format(parseISO(exame.date), "dd'/'MM'/'yyyy")}</td>
-                <td>{exame.instrutor.nome}</td>
-                <td>
-                  <button
-                    onClick={() => {
-                      handleApproved(exame.id);
-                    }}
-                    className="approved"
-                    type="button"
-                  >
-                    Aprovado
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleDisapproved(exame.id);
-                    }}
-                    className="disapproved"
-                    type="button"
-                  >
-                    Reprovado
-                  </button>
-                </td>
-                <td className="delete_button">
-                  <IoMdClose
-                    onClick={() => {
-                      handleDelete(exame.id);
-                    }}
-                  />
-                </td>
-              </tr>
-            ))}
+            {exames.map(exame =>
+              exame.aluno !== null ? (
+                <tr key={exame.id}>
+                  <td>{exame.aluno.nome}</td>
+                  <td>{exame.categoria}</td>
+                  <td>{format(parseISO(exame.date), "dd'/'MM'/'yyyy")}</td>
+                  <td>{exame.instrutor.nome}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        handleApproved(exame.id);
+                      }}
+                      className="approved"
+                      type="button"
+                    >
+                      Aprovado
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDisapproved(exame.id);
+                      }}
+                      className="disapproved"
+                      type="button"
+                    >
+                      Reprovado
+                    </button>
+                  </td>
+                  <td className="delete_button">
+                    <IoMdClose
+                      onClick={() => {
+                        handleDelete(exame.id);
+                      }}
+                    />
+                  </td>
+                </tr>
+              ) : null
+            )}
           </tbody>
         </table>
       </Content>

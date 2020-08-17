@@ -3,7 +3,10 @@ import { MdSearch } from 'react-icons/md';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #253138;
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkBackground)'
+      : 'var(--lightBackground)'};
   height: 100%;
 `;
 
@@ -17,9 +20,14 @@ export const Content = styled.div`
 export const Search = styled.div`
   display: flex;
   padding: 10px 20px;
-  color: #fff;
-  background: #2f3e47;
-  border-radius: 2px;
+  color: ${props =>
+    props.theme === 'dark' ? 'var(--darkTextColor)' : 'var(--lightTextColor)'};
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkTitleBackground)'
+      : 'var(--lightTitleBackground)'};
+
+  border-radius: 4px;
   align-items: center;
   justify-content: space-between;
 
@@ -39,12 +47,19 @@ export const Search = styled.div`
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
       margin-right: 0;
-      background: rgba(0, 0, 0, 0.3);
-      color: #fff;
+      background: ${props =>
+        props.theme === 'dark' ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.08)'};
+      color: ${props =>
+        props.theme === 'dark'
+          ? 'var(--darkTextColor)'
+          : 'var(--lightTextColor)'};
       padding: 10px;
 
       ::placeholder {
-        color: #fff;
+        color: ${props =>
+          props.theme === 'dark'
+            ? 'var(--darkTextColor)'
+            : 'var(--lightTextColor)'};
       }
     }
 
@@ -55,6 +70,7 @@ export const Search = styled.div`
   }
 
   button.exibir_todos {
+    outline: none;
     font-size: 14px;
     padding: 0 10px;
     border-radius: 4px;
@@ -65,6 +81,7 @@ export const Search = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: #17a2b8;
+    box-shadow: 0 0 5px #17a2b8, 0 0 10px #17a2b8, 0 0 1px #17a2b8;
     transition: background 0.2s;
 
     &:hover {
@@ -73,6 +90,7 @@ export const Search = styled.div`
   }
 
   button.add_aluno {
+    outline: none;
     font-size: 14px;
     padding: 0 10px;
     border-radius: 4px;
@@ -83,6 +101,8 @@ export const Search = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: #04d361;
+    box-shadow: 0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361;
+
     transition: background 0.2s;
 
     &:hover {
@@ -92,11 +112,13 @@ export const Search = styled.div`
 `;
 
 export const Icone = styled(MdSearch)`
+  outline: none;
   font-size: 38px;
   padding: 10px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  background: #04d361;
+  background-color: #04d361;
+  box-shadow: 0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361;
   color: #fff;
   transition: background 0.2s;
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Modal } from 'react-bootstrap';
+import { darken } from 'polished';
 
 export const ModalStyled = styled(Modal)`
   margin-top: 20px;
@@ -8,8 +9,12 @@ export const ModalStyled = styled(Modal)`
 export const ModalHeader = styled(Modal.Header)`
   display: flex;
   flex-direction: column;
-  background: #f2f2f2;
-  color: #000;
+  color: ${props =>
+    props.theme === 'dark' ? 'var(--darkTextColor)' : 'var(--lightTextColor)'};
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkTitleBackground)'
+      : 'var(--lightTitleBackground)'};
   font-weight: bold;
 
   h5 {
@@ -46,9 +51,12 @@ export const ModalBody = styled.div`
     }
 
     strong {
-      color: #fff;
+      color: ${props =>
+        props.theme === 'dark'
+          ? 'var(--darkTextColor)'
+          : 'var(--lightTextColor)'};
       font-size: 24px;
-      margin: 0 15px;
+      margin: 0 7px 0px 15px;
     }
   }
   ul {
@@ -62,16 +70,21 @@ export const ModalBody = styled.div`
 export const Aula = styled.li`
   padding: 20px;
   border-radius: 4px;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 1px #fff;
   background: ${props => (props.available ? '#f2f2f2' : '#fff')};
   cursor: pointer;
 
-  box-shadow: ${props => (props.clicked ? '1px 0px 30px #00b652' : '')};
-  border: ${props => (props.clicked ? '3px solid #00b652' : '')};
+  &.selected {
+    box-shadow: 1px 0px 30px #00b652;
+    border: 3px solid #00b652;
+  }
 
   opacity: ${props => (props.past ? 0.6 : 1)};
 
   strong {
-    display: block;
+    display: flex;
+    align-items: center;
     color: ${props => (props.available ? '#999' : '#00b652')};
     font-size: 20px;
     font-weight: normal;
@@ -82,5 +95,29 @@ export const Aula = styled.li`
     margin-top: 3px;
     color: ${props => (props.available ? '#999' : '#00b652')};
     font-size: 20px;
+  }
+`;
+
+export const Button = styled.button`
+  outline: none;
+  font-size: 14px;
+  padding: 0 20px;
+  border-radius: 4px;
+  border: 0;
+  margin-right: ${props => (props.close ? '150px' : '0px')};
+  height: 38px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: ${props => (props.close ? '#db0b3d' : '#04d361')};
+  box-shadow: ${props =>
+    !props.close
+      ? '0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361'
+      : ' 0 0 5px #db0b3d, 0 0 10px #db0b3d, 0 0 1px #db0b3d'};
+
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: ${props => (props.close ? '#AA092F' : '#00833B')};
   }
 `;

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState, useContext, useEffect } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
+import { Modal } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Input, Select, Form } from '@rocketseat/unform';
 import { parseISO, format } from 'date-fns';
 import { toast } from 'react-toastify';
-import { ModalStyled, ModalHeader, ModalBody } from './styles';
+import { ModalStyled, ModalHeader, ModalBody, Button } from './styles';
 
 import api from '../../services/api';
 
@@ -26,6 +27,7 @@ export default function EditarInstrutor({
   const [data_carteira, setData_carteira] = useState('');
   const [data_curso, setData_curso] = useState('');
   const [veiculo, setVeiculo] = useState('');
+  const theme = useContext(ThemeSwitcher);
 
   useEffect(() => {
     setNome(instrutor.nome);
@@ -62,11 +64,18 @@ export default function EditarInstrutor({
 
   return (
     <ModalStyled show={show}>
-      <ModalHeader>
+      <ModalHeader theme={theme.theme}>
         <h4>Editar cadastro</h4>
       </ModalHeader>
-      <Modal.Body style={{ background: '#2f3e47' }}>
-        <ModalBody>
+      <Modal.Body
+        style={{
+          background:
+            theme.theme === 'dark'
+              ? 'var(--darkBackground)'
+              : 'var(--lightBackground)',
+        }}
+      >
+        <ModalBody theme={theme.theme}>
           <Form onSubmit={handleSubmit} schema={schema}>
             <div className="alinhador">
               <p>Nome:</p>
@@ -128,10 +137,10 @@ export default function EditarInstrutor({
                 }}
               />
             </div>
-            <Button type="submit" variant="success">
+            <Button type="submit" style={{ marginTop: '15px' }}>
               Salvar
             </Button>
-            <Button variant="danger" onClick={handleClose}>
+            <Button close onClick={handleClose}>
               Fechar
             </Button>
           </Form>

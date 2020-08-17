@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #253138;
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkBackground)'
+      : 'var(--lightBackground)'};
   height: 150%;
 `;
 
@@ -23,14 +26,23 @@ export const Title = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 10px 20px;
-  background: #2f3e47;
-  color: #fff;
-  border-radius: 2px;
+  color: ${props =>
+    props.theme === 'dark' ? 'var(--darkTextColor)' : 'var(--lightTextColor)'};
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkTitleBackground)'
+      : 'var(--lightTitleBackground)'};
+  border-radius: 4px;
   align-items: center;
 
   div.title {
     display: flex;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+
+    svg {
+      margin-top: 3px;
+      margin-right: 10px;
+    }
   }
 
   div.dates {
@@ -55,7 +67,9 @@ export const Title = styled.div`
   }
 
   button.add {
-    background: #00b652;
+    outline: none;
+    background-color: #00b652;
+    box-shadow: 0 0 5px #00b652, 0 0 10px #00b652, 0 0 1px #00b652;
     border: 0;
     width: 30px;
     height: 30px;
@@ -72,7 +86,9 @@ export const Title = styled.div`
   }
 
   button.clear {
-    background: #ff7812;
+    outline: none;
+    background-color: #ff7812;
+    box-shadow: 0 0 5px #ff7812, 0 0 10px #ff7812, 0 0 1px #ff7812;
     border: 0;
     height: 30px;
     font-size: 16px;
@@ -89,7 +105,9 @@ export const Title = styled.div`
   }
 
   button.exam {
-    background: #de0930;
+    outline: none;
+    background-color: #7159c1;
+    box-shadow: 0 0 5px #7159c1, 0 0 10px #7159c1, 0 0 1px #7159c1;
     border: 0;
     height: 30px;
     font-size: 16px;
@@ -101,7 +119,7 @@ export const Title = styled.div`
     transition: background 0.2s;
 
     &:hover {
-      background: ${darken(0.1, '#DE0930')};
+      background: ${darken(0.1, '#7159c1')};
     }
   }
 `;
@@ -114,27 +132,39 @@ export const Aula = styled.li`
   opacity: ${props => (props.past ? 0.6 : 1)};
 
   strong {
-    display: block;
+    display: flex;
+    align-items: center;
     color: #00b652;
     font-size: 20px;
     font-weight: normal;
+
+    svg {
+      margin-right: 7px;
+    }
   }
 
   span {
-    display: block;
+    display: flex;
+    align-items: center;
     margin-top: 3px;
     color: #666;
     font-size: 20px;
+
+    svg {
+      margin-top: 3px;
+      margin-right: 7px;
+    }
   }
 
   ${props =>
     !props.past
       ? css`
           button {
-            margin-top: 5px;
+            margin-top: 6px;
             border: none;
-            background: #f42557;
-            padding: 5px;
+            background-color: #f42557;
+            box-shadow: 0 0 5px #f42557, 0 0 10px #f42557, 0 0 1px #f42557;
+            padding: 8px;
             color: #fff;
             border-radius: 4px;
 

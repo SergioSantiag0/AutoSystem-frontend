@@ -1,5 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState, useContext, useMemo, useEffect } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
+import { Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import {
   format,
@@ -16,9 +17,10 @@ import {
 import { utcToZonedTime } from 'date-fns-tz';
 import pt from 'date-fns/locale/pt';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+
 import api from '../../services/api';
 
-import { ModalStyled, ModalBody, ModalHeader, Aula } from './styles';
+import { ModalStyled, ModalBody, ModalHeader, Aula, Button } from './styles';
 
 const range = [7, 8, 9, 10, 11, 15, 16, 17, 18, 19];
 
@@ -30,10 +32,11 @@ export default function Agenda({
   instrutor_id,
   instrutor_nome,
 }) {
+  const theme = useContext(ThemeSwitcher);
   const [agenda, setAgenda] = useState([]);
   const [date, setDate] = useState(new Date());
 
-  const [clicked, setClicked] = useState('');
+  const [clicked, setClicked] = useState([]);
 
   const dateFormatted = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
@@ -84,7 +87,7 @@ export default function Agenda({
         setSeconds(setMinutes(setHours(day, hour), 0), 0),
         0
       );
-      setClicked(time);
+      setClicked([...clicked, time]);
 
       await api.post('/aulas', {
         date: dataAula,
@@ -97,7 +100,7 @@ export default function Agenda({
 
   return (
     <ModalStyled show={show} size="lg">
-      <ModalHeader>
+      <ModalHeader theme={theme.theme}>
         <h5>Agendar aula</h5>
         <div>
           <span>Aluno: {aluno_nome}</span>
@@ -105,15 +108,36 @@ export default function Agenda({
         </div>
       </ModalHeader>
 
-      <Modal.Body style={{ background: '#253138' }}>
-        <ModalBody>
+      <Modal.Body
+        style={{
+          background:
+            theme.theme === 'dark'
+              ? 'var(--darkBackground)'
+              : 'var(--lightBackground)',
+        }}
+      >
+        <ModalBody theme={theme.theme}>
           <header>
             <button type="button" onClick={handlePrevDay}>
-              <MdChevronLeft size={36} color="#fff" />
+              <MdChevronLeft
+                size={36}
+                color={
+                  theme.theme === 'dark'
+                    ? 'var(--darkTextColor)'
+                    : 'var(--lightTextColor)'
+                }
+              />
             </button>
             <strong>{dateFormatted}</strong>
             <button type="button" onClick={handleNextDay}>
-              <MdChevronRight size={36} color="#fff" />
+              <MdChevronRight
+                size={36}
+                color={
+                  theme.theme === 'dark'
+                    ? 'var(--darkTextColor)'
+                    : 'var(--lightTextColor)'
+                }
+              />
             </button>
           </header>
 
@@ -126,7 +150,7 @@ export default function Agenda({
                 past={time.past}
                 key={time.time}
                 available={!time.aula}
-                clicked={time.time === clicked}
+                className={clicked.includes(time.time) ? 'selected' : ''}
               >
                 <strong>{time.time}</strong>
                 <span>{time.aula ? time.aula.aluno.nome : 'Em aberto'}</span>
@@ -136,13 +160,18 @@ export default function Agenda({
         </ModalBody>
       </Modal.Body>
 
-      <Modal.Footer style={{ background: '#2f3e47' }}>
-        <Button variant="danger" onClick={handleClose}>
+      <Modal.Footer
+        style={{
+          background:
+            theme.theme === 'dark'
+              ? 'var(--darkTitleBackground)'
+              : 'var(--lightTitleBackground)',
+        }}
+      >
+        <Button close onClick={handleClose}>
           Fechar
         </Button>
-        <Button variant="success" onClick={handleClose}>
-          Salvar
-        </Button>
+        <Button onClick={handleClose}>Salvar</Button>
       </Modal.Footer>
     </ModalStyled>
   );

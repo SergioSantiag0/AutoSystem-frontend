@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Head, Title, List } from './styles';
+import ThemeSwitcher from '../ThemeSwitcher';
 
 import logo from '../../assets/logo3.png';
 
@@ -37,6 +38,7 @@ export default function Header() {
         >
           Logout
         </button>
+        <ThemeSwitcher />
       </List>
     </Head>
   );

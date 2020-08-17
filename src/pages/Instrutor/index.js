@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import { Form, Input, Select } from '@rocketseat/unform';
 import Swal from 'sweetalert2';
 import { format, parseISO } from 'date-fns';
@@ -27,6 +28,7 @@ const schema = Yup.object().shape({
 export default function Instrutor() {
   const [veiculos, setVeiculos] = useState([]);
   const [instrutores, setInstrutores] = useState([]);
+  const theme = useContext(ThemeSwitcher);
 
   const [exibir, setExibir] = useState(false);
 
@@ -100,10 +102,10 @@ export default function Instrutor() {
   }
 
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
-      <Content>
-        <Title>
+      <Content theme={theme.theme}>
+        <Title theme={theme.theme}>
           <AiFillExclamationCircle />
           <h1>Instrutores</h1>
         </Title>
@@ -151,10 +153,10 @@ export default function Instrutor() {
           </div>
           <button type="submit">Salvar</button>
         </Form>
-        <Title>
+        <Title theme={theme.theme}>
           <h1>Instrutores cadastrados</h1>
         </Title>
-        <Table>
+        <Table theme={theme.theme}>
           <thead>
             <tr>
               <th>Nome</th>

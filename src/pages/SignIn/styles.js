@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background: #17171a;
@@ -23,27 +23,12 @@ export const Content = styled.div`
     flex-direction: column;
     margin-top: -40px;
 
-    input {
-      font-size: 16px;
-      width: 300px;
-      height: 38px;
-      margin: 5px 0;
-      border: 0;
-      border-radius: 4px;
-      background: rgba(0, 0, 0, 0.3);
-      color: #fff;
-      padding: 10px;
-    }
-
-    span {
-      color: #f64c75;
-    }
-
     button {
       margin-top: 10px;
       font-size: 16px;
       border-radius: 4px;
       border: 0;
+      outline: none;
       height: 38px;
       color: #fff;
       font-weight: bold;
@@ -69,5 +54,66 @@ export const Content = styled.div`
     margin-top: -80px;
     width: 200px;
     height: 200px;
+  }
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  width: 300px;
+  height: 38px;
+  margin: 5px 0;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  /* padding: 10px; */
+  color: #666360;
+  display: flex;
+  align-items: center;
+
+  span {
+    div {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s;
+    }
+
+    svg {
+      margin-right: 16px;
+    }
+
+    &:hover div {
+      opacity: 0.9;
+      visibility: visible;
+    }
+  }
+
+  ${props =>
+    props.isFocused &&
+    css`
+      color: #04d361;
+      border-color: #04d361;
+    `}
+
+  input {
+    font-size: 14px;
+    background: transparent;
+    border: 0;
+    flex: 1;
+    color: #fff;
+
+    &::placeholder {
+      color: #666360;
+    }
+  }
+
+  div {
+    margin-right: 16px;
+    background: rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;

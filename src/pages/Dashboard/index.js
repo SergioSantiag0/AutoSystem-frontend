@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import InputMask from 'react-input-mask';
 
 import { toast } from 'react-toastify';
@@ -14,6 +15,8 @@ import Tabela from '../../components/Tabela';
 export default function Dashboard() {
   const [cpf_mask, setCpfMask] = useState('');
   const [aluno_, setAluno_] = useState('');
+
+  const theme = useContext(ThemeSwitcher);
 
   function handleSearch(cpf_number) {
     if (cpf_number.length <= 13) {
@@ -33,10 +36,10 @@ export default function Dashboard() {
     }
   }
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
       <Content>
-        <Search>
+        <Search theme={theme.theme}>
           <span>Consultar aluno</span>
           <div>
             <InputMask

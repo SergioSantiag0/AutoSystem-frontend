@@ -1,22 +1,36 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #253138;
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkBackground)'
+      : 'var(--lightBackground)'};
 `;
 
 export const Title = styled.div`
   display: flex;
   padding: 10px 20px;
-  background: #2f3e47;
   border-radius: 4px;
+
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkTitleBackground)'
+      : 'var(--lightTitleBackground)'};
+  border-radius: 2px;
 
   svg {
     font-size: 30px;
     margin-right: 15px;
-    color: #f2f2f2;
+    color: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTextColor)'
+        : 'var(--lightTextColor)'};
   }
   h1 {
-    color: #f2f2f2;
+    color: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTextColor)'
+        : 'var(--lightTextColor)'};
     font-size: 30px;
   }
 `;
@@ -28,13 +42,15 @@ export const Content = styled.div`
   padding: 10px;
 
   form {
-    background: #f2f2f2;
+    background: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTitleBackground)'
+        : 'var(--lightTitleBackground)'};
     border-radius: 4px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    box-shadow: 0 0 0.4em #fff;
 
     div.alinhador-content {
       display: flex;
@@ -50,7 +66,10 @@ export const Content = styled.div`
       display: block;
       font-size: 24px;
       margin: 20px 0;
-      color: #020202;
+      color: ${props =>
+        props.theme === 'dark'
+          ? 'var(--darkTextColor)'
+          : 'var(--lightTextColor)'};
     }
 
     span {
@@ -60,6 +79,10 @@ export const Content = styled.div`
     }
 
     p {
+      color: ${props =>
+        props.theme === 'dark'
+          ? 'var(--darkTextColor)'
+          : 'var(--lightTextColor)'};
       margin-top: 10px;
       font-size: 16px;
       font-weight: bold;
@@ -76,7 +99,7 @@ export const Content = styled.div`
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 4px;
-      color: #000;
+      color: #252527;
       padding: 10px;
       margin-right: 15px;
     }
@@ -88,12 +111,12 @@ export const Content = styled.div`
       margin: 12px 15px 7px 0px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      color: #000;
+      color: #252527;
       padding: 8.5px;
     }
 
     select option {
-      color: #000;
+      color: #252527;
     }
 
     button {
@@ -106,6 +129,7 @@ export const Content = styled.div`
       font-weight: bold;
       cursor: pointer;
       background-color: #04d361;
+      box-shadow: 0 0 5px #04d361, 0 0 3px #04d361, 0 0 1px #04d361;
       transition: background 0.2s;
 
       &:hover {

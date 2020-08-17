@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import Swal from 'sweetalert2';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { parseISO, format } from 'date-fns';
@@ -13,6 +14,7 @@ import { Container } from './styles';
 
 export default function Tabela({ aluno_ }) {
   const [alunos, setAlunos] = useState([]);
+  const theme = useContext(ThemeSwitcher);
 
   useEffect(() => {
     api.get('/alunos').then(res => {
@@ -52,7 +54,7 @@ export default function Tabela({ aluno_ }) {
   const paginate = pageNumber => setPaginaAtual(pageNumber);
 
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <table>
         <thead>
           <tr>
@@ -188,6 +190,7 @@ export default function Tabela({ aluno_ }) {
         alunosPorPagina={alunosPorPagina}
         totalAlunos={alunos.length}
         paginate={paginate}
+        theme={theme.theme}
       />
     </Container>
   );

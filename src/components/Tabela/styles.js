@@ -7,7 +7,15 @@ export const Container = styled.div`
   table {
     border-collapse: collapse;
     border-spacing: 0;
-    background: #fff;
+    color: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTextColor)'
+        : 'var(--lightTextColor)'};
+    background: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTitleBackground)'
+        : 'var(--lightTitleBackground)'};
+
     width: 100%;
     border-radius: 2px;
 
@@ -23,6 +31,7 @@ export const Container = styled.div`
     /* Cabeçalho */
     thead {
       tr {
+        font-family: 'Roboto', sans-serif;
         height: 50px;
       }
       th {
@@ -33,19 +42,27 @@ export const Container = styled.div`
     /* Corpo */
     tbody {
       tr:nth-child(odd) {
-        background-color: #ddd;
+        background-color: ${props =>
+          props.theme === 'dark'
+            ? 'var(--tableRowDarkOdd)'
+            : 'var(--tableRowLightOdd)'};
       }
       tr:nth-child(even) {
-        background-color: #fff;
+        background-color: ${props =>
+          props.theme === 'dark'
+            ? 'var(--tableRowDarkEven)'
+            : 'var(--tableRowLightEven)'};
       }
     }
 
     td button.agendar {
+      outline: none;
       padding: 8px 10px;
       color: #fff;
-      margin-right: 5px;
+      margin-right: 8px;
       border-radius: 4px;
       background: #0069d9;
+      box-shadow: 0 0 5px #0069d9, 0 0 10px #0069d9, 0 0 1px #0069d9;
       border: 0;
 
       &:hover {
@@ -54,10 +71,14 @@ export const Container = styled.div`
     }
 
     td button.editar {
+      outline: none;
       padding: 8px 10px;
-      margin-right: 5px;
+      margin-right: 8px;
       border-radius: 4px;
+      color: #f1f1f1;
       background: #ffc107;
+      box-shadow: 0 0 5px #ffc107, 0 0 10px #ffc107, 0 0 1px #ffc107;
+
       border: 0;
 
       &:hover {
@@ -66,14 +87,16 @@ export const Container = styled.div`
     }
 
     td button.inativar {
+      outline: none;
       padding: 8px 10px;
       color: #fff;
       border-radius: 4px;
       background: #f64c75;
+      box-shadow: 0 0 5px #f64c75, 0 0 10px #f64c75, 0 0 1px #f64c75;
       border: 0;
 
       &:hover {
-        background: ${darken(0.08, '#f64c75')};
+        background: ${darken(0.05, '#f64c75')};
       }
     }
 
@@ -95,35 +118,41 @@ export const Container = styled.div`
 // Paginação
 export const Lista = styled.ul`
   display: flex;
-  background: #2f3e47;
+  background: ${props => (props.theme === 'dark' ? '#252527' : '#ddd')};
+
   padding: 20px 10px;
 
   p {
     margin-right: auto;
     font-size: 18px;
-    color: #fff;
+    color: ${props => (props.theme === 'dark' ? '#f2f2f2' : '#252527')};
   }
 
   span {
-    color: #fff;
+    color: ${props => (props.theme === 'dark' ? '#f2f2f2' : '#252527')};
     font-weight: bold;
   }
 `;
 
 export const Numbers = styled.li`
   display: flex;
-  justify-content: center;
+
   width: 30px;
   height: 30px;
   border-radius: 50%;
   font-weight: bold;
-  border: 1px solid #fff;
   margin-right: 3px;
 `;
 
 export const Link = styled.a`
   font-size: 18px;
-  color: #fff;
+  color: ${props => (props.theme === 'dark' ? '#f2f2f2' : '#252527')};
   margin-top: 3px;
-  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    text-decoration: none;
+    color: #04d361;
+  }
 `;

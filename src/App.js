@@ -1,4 +1,5 @@
 import React from 'react';
+import ThemeSwitcherProvider from './context/ThemeSwitcher';
 import { Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Routes from './routes';
@@ -10,9 +11,11 @@ import GlobalStyle from './styles/global';
 function App() {
   return (
     <Router history={history}>
-      <Routes />
-      <GlobalStyle />
-      <ToastContainer autoClose={3000} />
+      <ThemeSwitcherProvider>
+        <Routes />
+        <GlobalStyle />
+        <ToastContainer autoClose={3000} />
+      </ThemeSwitcherProvider>
     </Router>
   );
 }

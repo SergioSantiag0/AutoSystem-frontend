@@ -11,6 +11,21 @@ export default createGlobalStyle`
   box-sizing: border-box;
 }
 
+:root {
+  --lightBackground: #E8EBF1;
+  --darkBackground: #17171a;
+  --lightTextColor: #252527;
+  --darkTextColor: #fff;
+  --lightTitleBackground: #fff;
+  --darkTitleBackground: #252527;
+
+  --tableRowDarkOdd: #57585c;
+  --tableRowLightOdd: #CCC;
+
+  --tableRowDarkEven: #3f4042;
+  --tableRowLightEven: #fff;
+}
+
 *:focus {
   outline: 0;
 }
@@ -21,11 +36,11 @@ html, body, #root {
 
 body {
   -webkit-font-smoothing: antialiased;
-  background: #253138;
+
 }
 
 body, input, button {
-  font: 14px 'Roboto', sans-serif
+  font: 16px 'Roboto Slab', serif
 }
 
 a {
@@ -36,7 +51,12 @@ ul {
   list-style: none;
 }
 
+h1, h2, h3, h4, h5, h6, strong {
+  font-weight: 500;
+}
+
 button {
    cursor: pointer;
+
 }
 `;

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import { parseISO, format } from 'date-fns';
 import Swal from 'sweetalert2';
+import { MdSchedule } from 'react-icons/md';
 import { AiOutlineSchedule } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
@@ -16,6 +18,7 @@ export default function AgendaAluno({ match }) {
   const [aulas, setAulas] = useState([]);
   const aluno = match.params.nome;
   const { instrutor } = match.params;
+  const theme = useContext(ThemeSwitcher);
 
   // Controladores dos modais de cadastro de aulas e exames
   const [exibir, setExibir] = useState(false);
@@ -92,12 +95,12 @@ export default function AgendaAluno({ match }) {
   }
 
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
-      <Content>
-        <Title>
+      <Content theme={theme.theme}>
+        <Title theme={theme.theme}>
           <div className="title">
-            <AiOutlineSchedule color="#00b652" />
+            <MdSchedule color="#00b652" />
             <h1>Agenda de aulas práticas</h1>
           </div>
           <div className="dates">
@@ -113,6 +116,7 @@ export default function AgendaAluno({ match }) {
               >
                 +
               </button>
+
               <button className="exam" type="button" onClick={handleAddExam}>
                 Agendar exame
               </button>
@@ -131,8 +135,14 @@ export default function AgendaAluno({ match }) {
         <ul>
           {aulas.map(aula => (
             <Aula key={aula.id} past={aula.past}>
-              <strong>{format(parseISO(aula.date), 'dd/MM/yyyy')}</strong>
-              <span>{format(parseISO(aula.date), 'HH:mm')}</span>
+              <strong>
+                <AiOutlineSchedule />
+                {format(parseISO(aula.date), 'dd/MM/yyyy')}
+              </strong>
+              <span>
+                <MdSchedule />
+                {format(parseISO(aula.date), 'HH:mm')}
+              </span>
               <button
                 onClick={() => {
                   handleCancelAula(aula.id);

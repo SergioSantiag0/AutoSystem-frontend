@@ -1,13 +1,14 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 
-import { ModalStyled, ModalHeader, ModalBody } from './styles';
+import { ModalStyled, ModalHeader, ModalBody, Button } from './styles';
 
 export default function AgendarExame({ show, handleClose, dados }) {
+  const theme = useContext(ThemeSwitcher);
   async function handleSubmit(data) {
     const { aluno_id, instrutor_id, categoria, date } = data;
     try {
@@ -19,10 +20,10 @@ export default function AgendarExame({ show, handleClose, dados }) {
   }
   return (
     <ModalStyled show={show}>
-      <ModalHeader>
+      <ModalHeader theme={theme.theme}>
         <h4>Agendar exame de direção</h4>
       </ModalHeader>
-      <ModalBody>
+      <ModalBody theme={theme.theme}>
         <Form onSubmit={handleSubmit}>
           <div className="alinhador">
             <p>Aluno</p>
@@ -64,10 +65,8 @@ export default function AgendarExame({ show, handleClose, dados }) {
             <p>Data</p>
             <Input type="date" name="date" />
           </div>
-          <Button variant="success" type="submit">
-            Salvar
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
+          <Button type="submit">Salvar</Button>
+          <Button close onClick={handleClose}>
             Fechar
           </Button>
         </Form>

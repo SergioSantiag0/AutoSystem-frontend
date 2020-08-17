@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import Swal from 'sweetalert2';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
@@ -22,6 +23,7 @@ const schema = Yup.object().shape({
 export default function Veiculo() {
   const [veiculos, setVeiculos] = useState([]);
   const [exibir, setExibir] = useState(false);
+  const theme = useContext(ThemeSwitcher);
 
   // Usado para editar o cadastro
   const [veiculo, setVeiculo] = useState([]);
@@ -76,10 +78,10 @@ export default function Veiculo() {
   }
 
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
-      <Content>
-        <Title>
+      <Content theme={theme.theme}>
+        <Title theme={theme.theme}>
           <AiFillExclamationCircle />
           <h1>Veículos</h1>
         </Title>
@@ -111,10 +113,10 @@ export default function Veiculo() {
           </div>
           <button type="submit">Salvar</button>
         </Form>
-        <Title>
+        <Title theme={theme.theme}>
           <h1>Veículos cadastrados</h1>
         </Title>
-        <Table>
+        <Table theme={theme.theme}>
           <thead>
             <tr>
               <th>Placa</th>

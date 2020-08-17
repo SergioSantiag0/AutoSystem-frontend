@@ -3,8 +3,9 @@ import { darken } from 'polished';
 
 export const Head = styled.header`
   width: 100%;
-  background: ${darken(0.03, '#253138')};
+  background: #252527;
   display: flex;
+
   justify-content: space-between;
   height: 60px;
   color: #fff;
@@ -16,7 +17,7 @@ export const Title = styled.header`
   align-items: center;
 
   img {
-    margin-top: 2px;
+    margin-top: -5px;
     width: 200px;
     height: 200px;
   }
@@ -40,9 +41,11 @@ export const List = styled.ul`
   }
 
   button {
+    outline: none;
     background: none;
     color: #fff;
-    background: ${darken(0.1, '#f42557')};
+    background: #db0b3d;
+    box-shadow: 0 0 5px #db0b3d, 0 0 10px #db0b3d, 0 0 1px #db0b3d;
     border: none;
     font-size: 18px;
     margin-top: 11px;
@@ -52,7 +55,7 @@ export const List = styled.ul`
     transition: background 0.2s;
 
     &:hover {
-      background: ${darken(0.2, '#f42557')};
+      background: ${darken(0.1, '#DB0B3D')};
     }
   }
 

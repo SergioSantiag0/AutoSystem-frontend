@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { format, parseISO } from 'date-fns';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 import { AiFillExclamationCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
@@ -43,6 +45,7 @@ const schema = Yup.object().shape({
 });
 
 export default function EditarAluno({ match }) {
+  const theme = useContext(ThemeSwitcher);
   // Recebe os dados do useEffect
   const [instrutores, setInstrutores] = useState([]);
   const [veiculos, setVeiculos] = useState([]);
@@ -52,6 +55,9 @@ export default function EditarAluno({ match }) {
   // Estados dos selects
   const [sexo_aluno, setSexo] = useState('');
   const [uf_aluno, setUf] = useState('');
+  const [ufs, setUfs] = useState([]);
+  const [cidade, setCidade] = useState('');
+  const [citys, setCitys] = useState([]);
   const [categoria_aluno, setCategoria] = useState('');
   const [instrutor_aluno, setInstrutor] = useState('');
   const [veiculo_aluno, setVeiculo] = useState('');
@@ -67,6 +73,7 @@ export default function EditarAluno({ match }) {
         setAluno(res.data);
         setSexo(res.data.sexo);
         setUf(res.data.uf);
+        setCidade(res.data.cidade);
         setCategoria(res.data.categoria);
         setInstrutor(res.data.instrutor_id);
         setVeiculo(res.data.veiculo_id);
@@ -77,11 +84,15 @@ export default function EditarAluno({ match }) {
       .catch(error => {
         toast.error('Aluno não encontrado');
       });
-
+    // Buscando veiculos e instrutores
     api
       .get('/instrutores')
       .then(res => {
-        setInstrutores(res.data);
+        const instrutoresTitle = res.data.map(instrutor => ({
+          ...instrutor,
+          title: instrutor.nome,
+        }));
+        setInstrutores(instrutoresTitle);
       })
       .catch(error => {
         setInstrutores([]);
@@ -90,27 +101,48 @@ export default function EditarAluno({ match }) {
     api
       .get('/veiculos')
       .then(res => {
-        setVeiculos(res.data);
+        const veiculosTitle = res.data.map(veiculo => ({
+          ...veiculo,
+          title: veiculo.placa,
+        }));
+        setVeiculos(veiculosTitle);
       })
       .catch(error => setVeiculos([]));
   }, [match.params.cpf]);
 
-  // Atribuindo titulo para usar nos Selects
-  instrutores.map(instrutor => {
-    instrutor.title = instrutor.nome;
-  });
+  // Buscando estados do IBGE
+  useEffect(() => {
+    axios
+      .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+      .then(response => {
+        const ufNames = response.data.map(uf => ({
+          id: uf.sigla,
+          title: uf.sigla,
+        }));
+        setUfs(ufNames);
+      });
+  }, []);
 
-  veiculos.map(veiculo => {
-    veiculo.title = veiculo.placa;
-  });
+  // Buscando cidades do IBGE
+  useEffect(() => {
+    axios
+      .get(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf_aluno}/municipios`
+      )
+      .then(response => {
+        const cityNames = response.data.map(city => ({
+          id: city.nome,
+          title: city.nome,
+        }));
+        setCitys(cityNames);
+      });
+  }, [uf_aluno]);
 
   const sexo = [
     { id: 'Masculino', title: 'Masculino' },
     { id: 'Feminino', title: 'Feminino' },
     { id: 'Outro', title: 'Outro' },
   ];
-
-  const uf = [{ id: 'MG', title: 'MG' }];
 
   const categoria = [
     { id: 'A', title: 'A' },
@@ -136,14 +168,19 @@ export default function EditarAluno({ match }) {
       });
   }
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
-      <Content>
-        <Title>
+      <Content theme={theme.theme}>
+        <Title theme={theme.theme}>
           <AiFillExclamationCircle />
           <h1>Editar cadastro</h1>
         </Title>
-        <Form initialData={aluno} onSubmit={handleSubmit} schema={schema}>
+        <Form
+          initialData={aluno}
+          onSubmit={handleSubmit}
+          schema={schema}
+          theme={theme.theme}
+        >
           <h5>Dados pessoais</h5>
           <div className="alinhador-content">
             <div className="alinhador">
@@ -208,17 +245,25 @@ export default function EditarAluno({ match }) {
             </div>
 
             <div className="alinhador">
-              <Input type="text" name="cidade" placeholder="Cidade" />
+              <Select
+                placeholder="Estado"
+                name="uf"
+                options={ufs}
+                value={uf_aluno}
+                onChange={e => {
+                  setUf(e.target.value);
+                }}
+              />
             </div>
 
             <div className="alinhador">
               <Select
-                placeholder="Estado"
-                name="uf"
-                options={uf}
-                value={uf_aluno}
+                placeholder="Cidade"
+                name="cidade"
+                options={citys}
+                value={cidade}
                 onChange={e => {
-                  setUf(e.target.value);
+                  setCidade(e.target.value);
                 }}
               />
             </div>

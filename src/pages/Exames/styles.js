@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #253138;
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkBackground)'
+      : 'var(--lightBackground)'};
+  height: 100%;
 `;
 
 export const Content = styled.div`
@@ -11,17 +15,25 @@ export const Content = styled.div`
   padding: 10px;
 
   table {
-    margin-top: 20px;
-    background: #fff;
     border-collapse: collapse;
     border-spacing: 0;
+
+    color: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTextColor)'
+        : 'var(--lightTextColor)'};
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkTitleBackground)'
+      : 'var(--lightTitleBackground)'};
+
     width: 100%;
+    margin-top: 20px;
     border-radius: 2px;
 
     tr {
       text-align: center;
       height: 50px;
-      border-bottom: 1px solid #ccc;
     }
 
     td {
@@ -42,13 +54,15 @@ export const Content = styled.div`
 
       button {
         padding: 8px 10px;
+        outline: none;
         color: #fff;
-        margin-right: 5px;
+        margin-right: 10px;
         border-radius: 4px;
         border: 0;
 
         &.approved {
-          background: #04d361;
+          background-color: #04d361;
+          box-shadow: 0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361;
 
           &:hover {
             background: ${darken(0.08, '#04d361')};
@@ -56,7 +70,8 @@ export const Content = styled.div`
         }
 
         &.disapproved {
-          background: #f64c75;
+          background-color: #f64c75;
+          box-shadow: 0 0 5px #f64c75, 0 0 10px #f64c75, 0 0 1px #f64c75;
 
           &:hover {
             background: ${darken(0.08, '#f64c75')};
@@ -76,32 +91,46 @@ export const Content = styled.div`
     /* Corpo */
     tbody {
       tr:nth-child(odd) {
-        background-color: #f2f2f2;
+        background-color: ${props =>
+          props.theme === 'dark'
+            ? 'var(--tableRowDarkOdd)'
+            : 'var(--tableRowLightOdd)'};
       }
       tr:nth-child(even) {
-        background-color: #fff;
+        background-color: ${props =>
+          props.theme === 'dark'
+            ? 'var(--tableRowDarkEven)'
+            : 'var(--tableRowLightEven)'};
       }
     }
-  }
 `;
 
 export const Title = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 10px 20px;
-  background: #2f3e47;
+  background: ${props =>
+    props.theme === 'dark'
+      ? 'var(--darkTitleBackground)'
+      : 'var(--lightTitleBackground)'};
   margin-top: 10px;
-  border-radius: 2px;
+  border-radius: 4px;
   align-items: center;
 
   svg {
     font-size: 30px;
     margin-right: 15px;
-    color: #f2f2f2;
+    color: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTextColor)'
+        : 'var(--lightTextColor)'};
     margin-bottom: 8px;
   }
   h1 {
-    color: #f2f2f2;
+    color: ${props =>
+      props.theme === 'dark'
+        ? 'var(--darkTextColor)'
+        : 'var(--lightTextColor)'};
     font-size: 30px;
   }
 
@@ -111,19 +140,21 @@ export const Title = styled.div`
     height: 38px;
     margin: 5px 0;
     border: 0;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-radius: 4px;
     margin-right: 0;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
-    padding: 10px;
+    background: ${props =>
+      props.theme === 'dark' ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.08)'};
+    color: ${props => (props.theme === 'dark' ? '#fff' : '#252527')};
+    padding: 8px;
 
     option {
-      background: #253138;
+      background: ${props =>
+        props.theme === 'dark' ? '#252527' : 'rgba(0, 0, 0, 0.08)'};
     }
   }
 
   button {
+    outline: none;
     font-size: 14px;
     padding: 0 10px;
     border-radius: 4px;
@@ -134,6 +165,7 @@ export const Title = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: #17a2b8;
+    box-shadow: 0 0 5px #17a2b8, 0 0 10px #17a2b8, 0 0 1px #17a2b8;
     transition: background 0.2s;
 
     &:hover {

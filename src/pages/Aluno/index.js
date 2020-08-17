@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
 import { Form, Input, Select } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
@@ -7,6 +8,7 @@ import { toast } from 'react-toastify';
 
 import { cpf } from 'cpf-cnpj-validator';
 
+import axios from 'axios';
 import api from '../../services/api';
 
 import Header from '../../components/Header';
@@ -44,16 +46,24 @@ const schema = Yup.object().shape({
 });
 
 export default function Aluno() {
+  const theme = useContext(ThemeSwitcher);
   // Recebe os dados do useEffect
   const [instrutores, setInstrutores] = useState([]);
   const [veiculos, setVeiculos] = useState([]);
+  const [ufs, setUfs] = useState([]);
+  const [citys, setCitys] = useState([{ id: '0', title: 'Cidade' }]);
+  const [selectedUf, setSelectedUf] = useState('');
 
   // Quando o componente for montado, busca instrutores e veiculos para os selects
   useEffect(() => {
     api
       .get('/instrutores')
       .then(res => {
-        setInstrutores(res.data);
+        const instrutoresTitle = res.data.map(instrutor => ({
+          ...instrutor,
+          title: instrutor.nome,
+        }));
+        setInstrutores(instrutoresTitle);
       })
       .catch(error => {
         setInstrutores([]);
@@ -62,27 +72,53 @@ export default function Aluno() {
     api
       .get('/veiculos')
       .then(res => {
-        setVeiculos(res.data);
+        const veiculosTitle = res.data.map(veiculo => ({
+          ...veiculo,
+          title: veiculo.placa,
+        }));
+        setVeiculos(veiculosTitle);
       })
       .catch(error => setVeiculos([]));
   }, []);
 
-  // Atribuindo titulo para usar nos Selects
-  instrutores.map(instrutor => {
-    instrutor.title = instrutor.nome;
-  });
+  // Buscando estados do IBGE
+  useEffect(() => {
+    axios
+      .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+      .then(response => {
+        const ufNames = response.data.map(uf => ({
+          id: uf.sigla,
+          title: uf.sigla,
+        }));
+        setUfs(ufNames);
+      });
+  }, []);
 
-  veiculos.map(veiculo => {
-    veiculo.title = veiculo.placa;
-  });
+  useEffect(() => {
+    axios
+      .get(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+      )
+      .then(response => {
+        const cityNames = response.data.map(city => ({
+          id: city.nome,
+          title: city.nome,
+        }));
+        setCitys(cityNames);
+      });
+  }, [selectedUf]);
+
+  function handleSelectUf(uf) {
+    setSelectedUf(uf);
+  }
+
+  // Atribuindo titulo para usar nos Selects
 
   const sexo = [
     { id: 'Masculino', title: 'Masculino' },
     { id: 'Feminino', title: 'Feminino' },
     { id: 'Outro', title: 'Outro' },
   ];
-
-  const uf = [{ id: 'MG', title: 'MG' }];
 
   const categoria = [
     { id: 'A', title: 'A' },
@@ -116,10 +152,10 @@ export default function Aluno() {
   }
 
   return (
-    <Container>
+    <Container theme={theme.theme}>
       <Header />
-      <Content>
-        <Title>
+      <Content theme={theme.theme}>
+        <Title theme={theme.theme}>
           <AiFillExclamationCircle />
           <h1>Cadastro de alunos</h1>
         </Title>
@@ -220,20 +256,23 @@ export default function Aluno() {
             </div>
 
             <div className="alinhador">
-              <Input
+              <Select
                 autoComplete="off"
-                type="text"
-                name="cidade"
-                placeholder="Cidade"
+                placeholder="Estado"
+                onChange={e => {
+                  handleSelectUf(e.target.value);
+                }}
+                name="uf"
+                options={ufs}
               />
             </div>
 
             <div className="alinhador">
               <Select
                 autoComplete="off"
-                placeholder="Estado"
-                name="uf"
-                options={uf}
+                placeholder="Cidade"
+                name="cidade"
+                options={citys}
               />
             </div>
           </div>

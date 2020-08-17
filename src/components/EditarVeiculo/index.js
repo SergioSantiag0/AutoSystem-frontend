@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState, useContext, useEffect } from 'react';
+import { ThemeSwitcher } from '../../context/ThemeSwitcher';
+import { Modal } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
-import { ModalStyled, ModalHeader, ModalBody } from './styles';
+import { ModalStyled, ModalHeader, ModalBody, Button } from './styles';
 
 import api from '../../services/api';
 
@@ -19,6 +20,7 @@ export default function EditarVeiculo({ show, handleClose, veiculo }) {
   const [cor, setCor] = useState('');
   const [modelo, setModelo] = useState('');
   const [ano, setAno] = useState('');
+  const theme = useContext(ThemeSwitcher);
 
   useEffect(() => {
     setPlaca(veiculo.placa);
@@ -43,8 +45,15 @@ export default function EditarVeiculo({ show, handleClose, veiculo }) {
       <ModalHeader>
         <h4>Editar cadastro</h4>
       </ModalHeader>
-      <Modal.Body style={{ background: '#2f3e47' }}>
-        <ModalBody>
+      <Modal.Body
+        style={{
+          background:
+            theme.theme === 'dark'
+              ? 'var(--darkBackground)'
+              : 'var(--lightBackground)',
+        }}
+      >
+        <ModalBody theme={theme.theme}>
           <Form onSubmit={handleSubmit} schema={schema}>
             <div className="alinhador">
               <p>Placa:</p>
@@ -94,10 +103,10 @@ export default function EditarVeiculo({ show, handleClose, veiculo }) {
                 }}
               />
             </div>
-            <Button variant="success" type="submit">
+            <Button type="submit" style={{ marginTop: '15px' }}>
               Salvar
             </Button>
-            <Button variant="danger" onClick={handleClose}>
+            <Button close onClick={handleClose}>
               Fechar
             </Button>
           </Form>

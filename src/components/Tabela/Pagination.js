@@ -3,7 +3,7 @@ import React from 'react';
 import { Lista, Numbers, Link } from './styles';
 
 // Paginação
-const Pagination = ({ alunosPorPagina, totalAlunos, paginate }) => {
+const Pagination = ({ alunosPorPagina, totalAlunos, paginate, theme }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalAlunos / alunosPorPagina); i++) {
@@ -12,7 +12,7 @@ const Pagination = ({ alunosPorPagina, totalAlunos, paginate }) => {
 
   return (
     <nav>
-      <Lista className="pagination">
+      <Lista className="pagination" theme={theme}>
         <p>
           Total de alunos: <span>{totalAlunos}</span>
         </p>

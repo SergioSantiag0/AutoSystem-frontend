@@ -117,7 +117,7 @@ export const Container = styled.div`
 // Paginação
 export const Lista = styled.ul`
   display: flex;
-  background: ${props => (props.theme === 'dark' ? '#252527' : '#ddd')};
+  background: ${props => (props.theme === 'dark' ? '#252527' : '#f2f2f2')};
 
   padding: 20px 10px;
 

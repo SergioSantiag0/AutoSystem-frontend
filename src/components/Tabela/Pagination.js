@@ -18,7 +18,7 @@ const Pagination = ({ alunosPorPagina, totalAlunos, paginate, theme }) => {
         </p>
         {pageNumbers.map(number => (
           <Numbers key={number}>
-            <Link onClick={() => paginate(number)} href="#">
+            <Link onClick={() => paginate(number)} href="#" theme={theme}>
               {number}
             </Link>
           </Numbers>

@@ -12,11 +12,11 @@ export default createGlobalStyle`
 }
 
 :root {
-  --lightBackground: #E8EBF1;
+  --lightBackground: #D8D8D8;
   --darkBackground: #17171a;
   --lightTextColor: #252527;
   --darkTextColor: #fff;
-  --lightTitleBackground: #fff;
+  --lightTitleBackground: #f2f2f2;
   --darkTitleBackground: #252527;
 
   --tableRowDarkOdd: #57585c;

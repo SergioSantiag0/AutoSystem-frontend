@@ -62,7 +62,7 @@ export const Content = styled.div`
 
         &.approved {
           background-color: #04d361;
-          box-shadow: 0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361;
+
 
           &:hover {
             background: ${darken(0.08, '#04d361')};
@@ -71,7 +71,7 @@ export const Content = styled.div`
 
         &.disapproved {
           background-color: #f64c75;
-          box-shadow: 0 0 5px #f64c75, 0 0 10px #f64c75, 0 0 1px #f64c75;
+
 
           &:hover {
             background: ${darken(0.08, '#f64c75')};
@@ -165,7 +165,7 @@ export const Title = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: #17a2b8;
-    box-shadow: 0 0 5px #17a2b8, 0 0 10px #17a2b8, 0 0 1px #17a2b8;
+
     transition: background 0.2s;
 
     &:hover {

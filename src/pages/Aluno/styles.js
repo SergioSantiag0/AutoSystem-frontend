@@ -129,7 +129,7 @@ export const Content = styled.div`
       font-weight: bold;
       cursor: pointer;
       background-color: #04d361;
-      box-shadow: 0 0 5px #04d361, 0 0 3px #04d361, 0 0 1px #04d361;
+
       transition: background 0.2s;
 
       &:hover {

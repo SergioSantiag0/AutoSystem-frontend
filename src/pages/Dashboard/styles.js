@@ -81,7 +81,7 @@ export const Search = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: #17a2b8;
-    box-shadow: 0 0 5px #17a2b8, 0 0 10px #17a2b8, 0 0 1px #17a2b8;
+
     transition: background 0.2s;
 
     &:hover {
@@ -101,7 +101,6 @@ export const Search = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: #04d361;
-    box-shadow: 0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361;
 
     transition: background 0.2s;
 
@@ -118,7 +117,7 @@ export const Icone = styled(MdSearch)`
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   background-color: #04d361;
-  box-shadow: 0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361;
+
   color: #fff;
   transition: background 0.2s;
 

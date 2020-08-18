@@ -62,7 +62,7 @@ export const Container = styled.div`
       margin-right: 8px;
       border-radius: 4px;
       background: #0069d9;
-      box-shadow: 0 0 5px #0069d9, 0 0 10px #0069d9, 0 0 1px #0069d9;
+
       border: 0;
 
       &:hover {
@@ -77,7 +77,6 @@ export const Container = styled.div`
       border-radius: 4px;
       color: #f1f1f1;
       background: #ffc107;
-      box-shadow: 0 0 5px #ffc107, 0 0 10px #ffc107, 0 0 1px #ffc107;
 
       border: 0;
 
@@ -92,7 +91,7 @@ export const Container = styled.div`
       color: #fff;
       border-radius: 4px;
       background: #f64c75;
-      box-shadow: 0 0 5px #f64c75, 0 0 10px #f64c75, 0 0 1px #f64c75;
+
       border: 0;
 
       &:hover {

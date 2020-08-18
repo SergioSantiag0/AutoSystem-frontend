@@ -45,7 +45,7 @@ export const List = styled.ul`
     background: none;
     color: #fff;
     background: #db0b3d;
-    box-shadow: 0 0 5px #db0b3d, 0 0 10px #db0b3d, 0 0 1px #db0b3d;
+
     border: none;
     font-size: 18px;
     margin-top: 11px;

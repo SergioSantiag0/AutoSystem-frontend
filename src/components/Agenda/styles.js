@@ -75,7 +75,6 @@ export const Aula = styled.li`
   cursor: pointer;
 
   &.selected {
-    box-shadow: 1px 0px 30px #00b652;
     border: 3px solid #00b652;
   }
 
@@ -109,10 +108,6 @@ export const Button = styled.button`
   font-weight: bold;
   cursor: pointer;
   background-color: ${props => (props.close ? '#db0b3d' : '#04d361')};
-  box-shadow: ${props =>
-    !props.close
-      ? '0 0 5px #04d361, 0 0 10px #04d361, 0 0 1px #04d361'
-      : ' 0 0 5px #db0b3d, 0 0 10px #db0b3d, 0 0 1px #db0b3d'};
 
   transition: background 0.2s;
 

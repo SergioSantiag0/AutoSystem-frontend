@@ -69,7 +69,7 @@ export const Title = styled.div`
   button.add {
     outline: none;
     background-color: #00b652;
-    box-shadow: 0 0 5px #00b652, 0 0 10px #00b652, 0 0 1px #00b652;
+
     border: 0;
     width: 30px;
     height: 30px;
@@ -88,7 +88,7 @@ export const Title = styled.div`
   button.clear {
     outline: none;
     background-color: #ff7812;
-    box-shadow: 0 0 5px #ff7812, 0 0 10px #ff7812, 0 0 1px #ff7812;
+
     border: 0;
     height: 30px;
     font-size: 16px;
@@ -107,7 +107,7 @@ export const Title = styled.div`
   button.exam {
     outline: none;
     background-color: #7159c1;
-    box-shadow: 0 0 5px #7159c1, 0 0 10px #7159c1, 0 0 1px #7159c1;
+
     border: 0;
     height: 30px;
     font-size: 16px;
@@ -163,7 +163,7 @@ export const Aula = styled.li`
             margin-top: 6px;
             border: none;
             background-color: #f42557;
-            box-shadow: 0 0 5px #f42557, 0 0 10px #f42557, 0 0 1px #f42557;
+
             padding: 8px;
             color: #fff;
             border-radius: 4px;
